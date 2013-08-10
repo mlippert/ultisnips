@@ -35,17 +35,62 @@ snippet typedef "type definition"
 
 endsnippet
 
+snippet filecmt "File comment"
+/* **************************************************************************
+ * \$Workfile:: name-of-file.js                                              \$
+ * *********************************************************************/ /**
+ *
+ * @fileoverview [summary of file contents]
+ *
+ * [More detail about the file's contents]
+ *
+ * Created on		June 17, 2013
+ * @author			Michael Jay Lippert
+ *
+ * @copyright (c) 2013 Pearson, All rights reserved.
+ *
+ * **************************************************************************/
+endsnippet
+
+snippet classcmt "Class comment"
+/* **************************************************************************
+ * $1                                                          */ /**
+ *
+ * Constructor function for $1 instances.
+ *
+ * @constructor
+ * @implements \{IWidget}
+ *
+ * @param \{Object}		config			-The settings to configure this $1
+ * @param \{string|undefined}
+ * 						config.id		-String to uniquely identify this $1.
+ * 										 if undefined a unique id will be assigned.
+ * @param \{EventManager=}
+ * 						eventManager	-The event manager to use for publishing events
+ * 										 and subscribing to them. (Optional)
+ *
+ * @classdesc
+ * [Description of the $1 class]
+ *
+ ****************************************************************************/
+function {$1:class_name}(config, eventManager)
+{
+	${VISUAL}$0
+}
+
+endsnippet
+
 snippet proto "Prototype (proto)"
 /* **************************************************************************
- * $1.$2                                                                *//**
+ * $1.$2                                                               */ /**
  *
  * [Description of $2]
  *
- * @param {Object}	$3		-[Description of $3]
+ * @param \{Object}	$3		-[Description of $3]
  *
  ****************************************************************************/
 ${1:class_name}.prototype.${2:method_name} = function(${3:first_argument})
-{
+\{
 	${VISUAL}$0
 };
 
