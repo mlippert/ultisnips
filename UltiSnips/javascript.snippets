@@ -25,17 +25,18 @@ snippet : "Object key key: 'value'"
 ${1:key}: ${2:"${3:value}"}${4:, }
 endsnippet
 
-snippet typedef "type definition"
+snippet typedef "type definition" b
 /**
- * ${1:description}
+ * ${2:description}
  *
  * @typedef {Object} ${1:Type-name}
  * @property {string}	prop1	-Description of prop1
  */
+${VISUAL}$1;
 
 endsnippet
 
-snippet filecmt "File comment"
+snippet filecmt "File comment" b
 /* **************************************************************************
  * \$Workfile:: name-of-file.js                                              \$
  * *********************************************************************/ /**
@@ -44,7 +45,7 @@ snippet filecmt "File comment"
  *
  * [More detail about the file's contents]
  *
- * Created on		June 17, 2013
+ * Created on		`date +"%B %-d, %Y"`
  * @author			Michael Jay Lippert
  *
  * @copyright (c) 2013 Pearson, All rights reserved.
@@ -52,51 +53,52 @@ snippet filecmt "File comment"
  * **************************************************************************/
 endsnippet
 
-snippet classcmt "Class comment"
+snippet classcmt "Class comment" b
 /* **************************************************************************
- * $1                                                          */ /**
+ * ${1/(?:\w+\.)*(.*)/$1/}                                                          $2*/ /**
  *
- * Constructor function for $1 instances.
+ * Constructor function for ${1/(?:\w+\.)*(.*)/$1/} instances.
  *
  * @constructor
  * @implements \{IWidget}
+ * @export
  *
- * @param \{Object}		config			-The settings to configure this $1
+ * @param \{Object}		config			-The settings to configure this ${1/(?:\w+\.)*(.*)/$1/}
  * @param \{string|undefined}
- * 						config.id		-String to uniquely identify this $1.
+ * 						config.id		-String to uniquely identify this ${1/(?:\w+\.)*(.*)/$1/}.
  * 										 if undefined a unique id will be assigned.
- * @param \{EventManager=}
+ * @param \{!EventManager=}
  * 						eventManager	-The event manager to use for publishing events
- * 										 and subscribing to them. (Optional)
+ * 										 and subscribing to them.
  *
  * @classdesc
  * [Description of the $1 class]
  *
  ****************************************************************************/
-function {$1:class_name}(config, eventManager)
-{
-	${VISUAL}$0
-}
-
-endsnippet
-
-snippet proto "Prototype (proto)"
-/* **************************************************************************
- * $1.$2                                                               */ /**
- *
- * [Description of $2]
- *
- * @param \{Object}	$3		-[Description of $3]
- *
- ****************************************************************************/
-${1:class_name}.prototype.${2:method_name} = function(${3:first_argument})
+${1:class_name} = function (config, eventManager)
 \{
-	${VISUAL}$0
+	$0
 };
 
 endsnippet
 
-snippet varcmt "Comment header for a variable"
+snippet proto "Prototype (proto)" b
+/* **************************************************************************
+ * ${1/(?:\w+\.)*(.*)/$1/}.$2                                                         $3*/ /**
+ *
+ * [Description of $2]
+ *
+ * @param \{Object}	${4/(\w+),.*/$1/}		-[Description of ${4/(\w+),.*/$1/}]
+ *
+ ****************************************************************************/
+${1:class_name}.prototype.${2:method_name} = function (${4:first_argument})
+\{
+	$0
+};
+
+endsnippet
+
+snippet varcmt "Comment header for a variable" b
 /**
  * ${1:Description}
  * @type {${2:type}}
