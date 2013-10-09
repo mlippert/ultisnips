@@ -38,7 +38,7 @@ endsnippet
 
 snippet filecmt "File comment" b
 /* **************************************************************************
- * \$Workfile:: name-of-file.js                                              \$
+ * \$Workfile:: `!v expand("%:t")`                                              $1\$
  * *********************************************************************/ /**
  *
  * @fileoverview [summary of file contents]
@@ -48,9 +48,14 @@ snippet filecmt "File comment" b
  * Created on		`date +"%B %-d, %Y"`
  * @author			Michael Jay Lippert
  *
- * @copyright (c) 2013 Pearson, All rights reserved.
+ * @copyright (c) `date +"%Y"` Pearson, All rights reserved.
  *
  * **************************************************************************/
+
+goog.provide('pearson.$2');
+
+goog.require('$0');
+
 endsnippet
 
 snippet classcmt "Class comment" b
@@ -60,14 +65,14 @@ snippet classcmt "Class comment" b
  * Constructor function for ${1/(?:\w+\.)*(.*)/$1/} instances.
  *
  * @constructor
- * @implements \{IWidget}
+ * @extends \{${1/((?:\w+\.)*)(?:.*)/$1/}${3:baseclass}}
  * @export
  *
  * @param \{Object}		config			-The settings to configure this ${1/(?:\w+\.)*(.*)/$1/}
  * @param \{string|undefined}
  * 						config.id		-String to uniquely identify this ${1/(?:\w+\.)*(.*)/$1/}.
  * 										 if undefined a unique id will be assigned.
- * @param \{!EventManager=}
+ * @param \{!pearson.utils.IEventManager=}
  * 						eventManager	-The event manager to use for publishing events
  * 										 and subscribing to them.
  *
@@ -77,8 +82,12 @@ snippet classcmt "Class comment" b
  ****************************************************************************/
 ${1:class_name} = function (config, eventManager)
 \{
+	// call the base class constructor
+	goog.base(this);
+
 	$0
 };
+goog.inherits($1, ${1/((?:\w+\.)*)(?:.*)/$1/}$3);
 
 endsnippet
 
